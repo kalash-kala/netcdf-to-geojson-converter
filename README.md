@@ -32,7 +32,7 @@ import netCDF4 as nc
 from netcdf2csv import convert_dir
 
 netcdf_dir_route = "" # contains the netcdf file location
-cleaned_csv_route = "" # this contains the file route where you want the CSV to be stored
+cleaned_csv_route = "" # this contains the file route where you want the cleaned CSV file to be stored
 csv_route = "" #contains the route where the uncleaned csv files will be stored
 
 convert_dir(netcdf_dir=netcdf_dir_route,csv_dir=csv_route,cleaned_csv_dir=cleaned_csv_route,clean_choice=1)
