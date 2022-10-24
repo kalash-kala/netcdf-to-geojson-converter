@@ -5,11 +5,19 @@ import csv, json
 from geojson import Feature, FeatureCollection, Point
 import numpy as np
 
-df = pd.read_csv('Enter your file location here')
 
-# to see what all columns are present in the csv file and information related to it
-df.info()
-df.decsribe()
+df = pd.read_csv('add the path of the converted CSV file')
+
+df = df.sample(20000)
+
+print(df.index.size)
+
+df.index = range(df.index.size)
+
+print(df.head())
+
+# converting the data type as int64 is not an acceptable JSON format
+df['elevation'] = df['elevation'].astype('float64')
 
 features = []
 
@@ -18,13 +26,11 @@ for ind in df.index:
             Feature(
                 geometry=Point([df.loc[ind,'lon'],df.loc[ind,'lat']]),
                 properties = {
-                    'time' : df.loc[ind,'time'],
-                    # like the above key value pair 
-                    # you can add many other pairs based on the properties you want from the csv
+                    'elevation' : df.loc[ind,'elevation']
                 }
             )
         )
 
 collection  = FeatureCollection(features)
-with open("Enter the json file location where this geoJSON should be stored", "w") as f:
+with open("add the destination json file location here", "w") as f:
     f.write('%s' % collection)
